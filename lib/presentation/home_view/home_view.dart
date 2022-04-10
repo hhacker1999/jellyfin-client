@@ -10,7 +10,16 @@ class HomeView extends StatelessWidget {
     return Consumer<HomeViewModel>(
       builder: (_, model, __) => Scaffold(
         body: Center(
-          child: Text(model.testText),
+          child: StreamBuilder<bool>(
+              stream: model.isLoading,
+              initialData: false,
+              builder: (_, AsyncSnapshot<bool> snapshot) {
+                if (!snapshot.data!) {
+                  return Text(model.testText);
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
         ),
       ),
     );
