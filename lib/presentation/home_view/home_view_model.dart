@@ -16,8 +16,7 @@ class HomeViewModel {
   Future<void> authenticate() async {
     _isLoading.sink.add(true);
     try {
-      final res = await authenticateUserUsecase.execute("harsh", "golusadh");
-      text = res.token;
+      await authenticateUserUsecase.execute("harsh", "golusadh");
       _isLoading.sink.add(false);
     } catch (e) {
       text = e.toString();

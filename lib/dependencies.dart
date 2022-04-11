@@ -1,9 +1,12 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jellyfin_client/data/auth/auth_implementation.dart';
 import 'package:jellyfin_client/data/device_info/device_info_implementation.dart';
+import 'package:jellyfin_client/data/storage/storage_implementation.dart';
 import 'package:jellyfin_client/domain/auth/auth_facade.dart';
 import 'package:jellyfin_client/domain/device_info/device_info_facade.dart';
+import 'package:jellyfin_client/domain/storage/storage_facade.dart';
 import 'package:jellyfin_client/usecases/authenticate_use_usecase.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -13,10 +16,12 @@ class AppDependencies {
 // Plugins
   late Dio _dio;
   late DeviceInfoPlugin _deviceInfoPlugin;
+  late FlutterSecureStorage _flutterSecureStorage;
 
 // Data Providers
   late DeviceInfoFacade _deviceInfoFacade;
   late AuthFacade _authFacade;
+  late StorageFacade _storageFacade;
 
 // Usecases
   late AuthenticateUserUsecase _authenticateUserUsecase;
@@ -26,15 +31,17 @@ class AppDependencies {
     // Plugins
     _dio = Dio();
     _deviceInfoPlugin = DeviceInfoPlugin();
+    _flutterSecureStorage = const FlutterSecureStorage();
 
     // Data Providers
     _deviceInfoFacade =
         DeviceInfoImplementation(_deviceInfoPlugin, _packageInfoPlugin);
     _authFacade = AuthImplementation(_dio);
+    _storageFacade = StorageImplementation(_flutterSecureStorage);
 
     // Usecases
     _authenticateUserUsecase =
-        AuthenticateUserUsecase(_deviceInfoFacade, _authFacade);
+        AuthenticateUserUsecase(_deviceInfoFacade, _authFacade, _storageFacade);
   }
 
   // Getters
