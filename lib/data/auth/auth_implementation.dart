@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:jellyfin_client/app/constansts.dart';
 import 'package:jellyfin_client/domain/auth/auth_facade.dart';
 import '../../domain/auth/authenticated_user_response_model.dart';
 
 class AuthImplementation implements AuthFacade {
-  static const _authPath = "/Users/authenticatebyname";
   final Dio _client;
 
   const AuthImplementation(this._client);
@@ -21,8 +21,9 @@ class AuthImplementation implements AuthFacade {
       };
       final String authHeader =
           await _createAuthHeader(device, deviceId, version);
+      const String authPath = AppConstants.authUrl;
       final Response response = await _client.post(
-          "http://192.168.0.161:8096$_authPath",
+          "http://192.168.0.161:8096$authPath",
           data: authMap,
           options: Options(headers: {"x-emby-authorization": authHeader}));
       final AuthenticatedUserResponse data = AuthenticatedUserResponse(
