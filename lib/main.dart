@@ -36,8 +36,10 @@ class _JellyfinClientState extends State<JellyfinClient> {
     return MaterialApp(
       home: Provider<HomeViewModel>(
           create: (_) => HomeViewModel(
-              authenticateUserUsecase:
-                  _appDependencies.authenticateUserUsecase),
+                authenticateUserUsecase:
+                    _appDependencies.authenticateUserUsecase,
+                getUserViewUsecase: _appDependencies.getUserViewUsecase,
+              ),
           dispose: (_, model) => model.dispose(),
           child: const HomeView()),
     );

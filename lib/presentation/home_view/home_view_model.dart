@@ -1,13 +1,16 @@
 import 'package:jellyfin_client/usecases/authenticate_use_usecase.dart';
+import 'package:jellyfin_client/usecases/get_user_views_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeViewModel {
-  String text = "Initial text";
   final AuthenticateUserUsecase authenticateUserUsecase;
-  HomeViewModel({
-    required this.authenticateUserUsecase,
-  }) {
-    authenticate();
+  final GetUserViewUsecase getUserViewUsecase;
+  String text = "Initial text";
+  HomeViewModel(
+      {required this.authenticateUserUsecase,
+      required this.getUserViewUsecase}) {
+    //authenticate();
+    getUserViewUsecase.execute();
   }
 
   final BehaviorSubject<bool> _isLoading = BehaviorSubject.seeded(false);
