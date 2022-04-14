@@ -20,6 +20,8 @@ class AuthenticateUserUsecase {
           username, password, deviceId, version, device);
       await _storageFacade.storeAuthToken(user.token);
       await _storageFacade.storeUserId(user.userId);
+      await _storageFacade.storeDeviceId(deviceId);
+      await _storageFacade.storeDeviceName(device);
     } catch (_) {
       rethrow;
     }

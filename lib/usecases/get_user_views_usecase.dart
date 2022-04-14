@@ -1,5 +1,5 @@
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
-import 'package:jellyfin_client/domain/jellyfin/jellyfin_view.dart';
+import 'package:jellyfin_client/domain/jellyfin/models/jellyfin_view.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
 
 class GetUserViewUsecase {

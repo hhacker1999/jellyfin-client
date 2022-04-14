@@ -36,4 +36,24 @@ class StorageImplementation implements StorageFacade {
   @override
   Future<void> storeUserId(String id) async =>
       await _secureStorage.write(key: "id", value: id);
+
+  @override
+  Future<String> getDeviceId() async {
+    final deviceId = await _secureStorage.read(key: "deviceId");
+    return deviceId!;
+  }
+
+  @override
+  Future<String> getDeviceName() async {
+    final host = await _secureStorage.read(key: "deviceName");
+    return host!;
+  }
+
+  @override
+  Future<void> storeDeviceId(String id) async =>
+      await _secureStorage.write(key: "deviceId", value: id);
+
+  @override
+  Future<void> storeDeviceName(String name) async =>
+      await _secureStorage.write(key: "deviceName", value: name);
 }

@@ -10,6 +10,8 @@ import 'package:jellyfin_client/domain/device_info/device_info_facade.dart';
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
 import 'package:jellyfin_client/usecases/authenticate_use_usecase.dart';
+import 'package:jellyfin_client/usecases/create_header_usecase.dart';
+import 'package:jellyfin_client/usecases/get_resumable_items_usecase.dart';
 import 'package:jellyfin_client/usecases/get_user_views_usecase.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -30,6 +32,8 @@ class AppDependencies {
 // Usecases
   late AuthenticateUserUsecase _authenticateUserUsecase;
   late GetUserViewUsecase _getUserViewUsecase;
+  late CreateHeaderUsecase _createHeaderUsecase;
+  late GetResumableItemsUsecase _getResumableItemsUsecase;
 
 // Initialisation
   AppDependencies(this._packageInfoPlugin) {
@@ -49,10 +53,16 @@ class AppDependencies {
     _authenticateUserUsecase =
         AuthenticateUserUsecase(_deviceInfoFacade, _authFacade, _storageFacade);
     _getUserViewUsecase = GetUserViewUsecase(_jellyFacade, _storageFacade);
+    _createHeaderUsecase =
+        CreateHeaderUsecase(_storageFacade, _deviceInfoFacade);
+    _getResumableItemsUsecase = GetResumableItemsUsecase(
+        _createHeaderUsecase, _jellyFacade, _storageFacade);
   }
 
   // Getters
   AuthenticateUserUsecase get authenticateUserUsecase =>
       _authenticateUserUsecase;
   GetUserViewUsecase get getUserViewUsecase => _getUserViewUsecase;
+  GetResumableItemsUsecase get getResumableItemsUsecase =>
+      _getResumableItemsUsecase;
 }
