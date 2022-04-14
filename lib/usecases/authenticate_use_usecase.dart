@@ -12,12 +12,16 @@ class AuthenticateUserUsecase {
       this._deviceInfo, this._auth, this._storageFacade);
 
   Future<void> execute(String username, password) async {
-    final String version = await _deviceInfo.getPackageInfo();
-    final String device = await _deviceInfo.getDeviceInfo();
-    final String deviceId = await _deviceInfo.getDeviceId();
-    final AuthenticatedUserResponse user = await _auth.authenticateUser(
-        username, password, deviceId, version, device);
-    await _storageFacade.storeAuthToken(user.token);
-    await _storageFacade.storeUserId(user.userId);
+    try {
+      final String version = await _deviceInfo.getPackageInfo();
+      final String device = await _deviceInfo.getDeviceInfo();
+      final String deviceId = await _deviceInfo.getDeviceId();
+      final AuthenticatedUserResponse user = await _auth.authenticateUser(
+          username, password, deviceId, version, device);
+      await _storageFacade.storeAuthToken(user.token);
+      await _storageFacade.storeUserId(user.userId);
+    } catch (_) {
+      rethrow;
+    }
   }
 }
