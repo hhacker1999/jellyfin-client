@@ -1,5 +1,6 @@
 import 'package:jellyfin_client/domain/usecases/authenticate_use_usecase.dart';
 import 'package:jellyfin_client/domain/usecases/get_resumable_items_usecase.dart';
+import 'package:jellyfin_client/domain/usecases/get_tmdb_trending_usecase.dart';
 import 'package:jellyfin_client/domain/usecases/get_user_views_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,11 +8,13 @@ class HomeViewModel {
   final AuthenticateUserUsecase authenticateUserUsecase;
   final GetUserViewUsecase getUserViewUsecase;
   final GetResumableItemsUsecase getResumableItemsUsecase;
+  final GetTmdbTrendingUsecase getTmdbTrendingUsecase;
   String text = "Initial text";
   HomeViewModel(
       {required this.authenticateUserUsecase,
       required this.getUserViewUsecase,
-      required this.getResumableItemsUsecase}) {
+      required this.getResumableItemsUsecase,
+      required this.getTmdbTrendingUsecase}) {
     authenticate();
   }
 
@@ -21,7 +24,8 @@ class HomeViewModel {
   Future<void> authenticate() async {
     _isLoading.sink.add(true);
     await authenticateUserUsecase.execute("harsh", "golusadh");
-    final item = await getResumableItemsUsecase.execute();
+    final item = await getTmdbTrendingUsecase.execute();
+    print(item.first);
     _isLoading.sink.add(false);
     _isLoading.sink.add(false);
   }

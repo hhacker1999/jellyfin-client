@@ -41,6 +41,7 @@ class _JellyfinClientState extends State<JellyfinClient> {
                 getUserViewUsecase: _appDependencies.getUserViewUsecase,
                 getResumableItemsUsecase:
                     _appDependencies.getResumableItemsUsecase,
+                getTmdbTrendingUsecase: _appDependencies.getTmdbTrendingUsecase,
               ),
           dispose: (_, model) => model.dispose(),
           child: const HomeView()),

@@ -5,10 +5,13 @@ import 'package:jellyfin_client/data/auth/auth_implementation.dart';
 import 'package:jellyfin_client/data/device_info/device_info_implementation.dart';
 import 'package:jellyfin_client/data/jellyfin/jellyfin_implementation.dart';
 import 'package:jellyfin_client/data/storage/storage_implementation.dart';
+import 'package:jellyfin_client/data/tmdb/tmdb_implementation.dart';
 import 'package:jellyfin_client/domain/auth/auth_facade.dart';
 import 'package:jellyfin_client/domain/device_info/device_info_facade.dart';
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
+import 'package:jellyfin_client/domain/tmdb/tmdb_facade.dart';
+import 'package:jellyfin_client/domain/usecases/get_tmdb_trending_usecase.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import 'domain/usecases/authenticate_use_usecase.dart';
@@ -29,12 +32,14 @@ class AppDependencies {
   late AuthFacade _authFacade;
   late StorageFacade _storageFacade;
   late JellyFacade _jellyFacade;
+  late TmdbFacade _tmdbFacade;
 
 // Usecases
   late AuthenticateUserUsecase _authenticateUserUsecase;
   late GetUserViewUsecase _getUserViewUsecase;
   late CreateHeaderUsecase _createHeaderUsecase;
   late GetResumableItemsUsecase _getResumableItemsUsecase;
+  late GetTmdbTrendingUsecase _getTmdbTrendingUsecase;
 
 // Initialisation
   AppDependencies(this._packageInfoPlugin) {
@@ -49,6 +54,7 @@ class AppDependencies {
     _authFacade = AuthImplementation(_dio);
     _storageFacade = StorageImplementation(_flutterSecureStorage);
     _jellyFacade = JellyfinImplementation(_dio);
+    _tmdbFacade = TmdbImplementation(_dio);
 
     // Usecases
     _authenticateUserUsecase =
@@ -58,6 +64,7 @@ class AppDependencies {
         CreateHeaderUsecase(_storageFacade, _deviceInfoFacade);
     _getResumableItemsUsecase = GetResumableItemsUsecase(
         _createHeaderUsecase, _jellyFacade, _storageFacade);
+    _getTmdbTrendingUsecase = GetTmdbTrendingUsecase(_tmdbFacade);
   }
 
   // Getters
@@ -66,4 +73,5 @@ class AppDependencies {
   GetUserViewUsecase get getUserViewUsecase => _getUserViewUsecase;
   GetResumableItemsUsecase get getResumableItemsUsecase =>
       _getResumableItemsUsecase;
+  GetTmdbTrendingUsecase get getTmdbTrendingUsecase => _getTmdbTrendingUsecase;
 }
