@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:jellyfin_client/app/constansts.dart';
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
-import 'package:jellyfin_client/domain/jellyfin/models/jellyfin_item.dart';
-import 'package:jellyfin_client/domain/jellyfin/models/jellyfin_view.dart';
+import 'package:jellyfin_client/domain/models/jellyfin_item.dart';
+import 'package:jellyfin_client/domain/models/jellyfin_view.dart';
 
 class JellyfinImplementation implements JellyFacade {
   final Dio _client;

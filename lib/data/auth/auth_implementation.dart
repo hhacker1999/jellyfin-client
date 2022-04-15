@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:jellyfin_client/app/constansts.dart';
 import 'package:jellyfin_client/domain/auth/auth_facade.dart';
-import '../../domain/auth/authenticated_user_response_model.dart';
+import '../../domain/models/authenticated_user_response_model.dart';
 
 class AuthImplementation implements AuthFacade {
   final Dio _client;

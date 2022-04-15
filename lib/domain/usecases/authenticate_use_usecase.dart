@@ -1,5 +1,5 @@
 import 'package:jellyfin_client/domain/auth/auth_facade.dart';
-import 'package:jellyfin_client/domain/auth/authenticated_user_response_model.dart';
+import 'package:jellyfin_client/domain/models/authenticated_user_response_model.dart';
 import 'package:jellyfin_client/domain/device_info/device_info_facade.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
 
