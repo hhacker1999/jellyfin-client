@@ -9,11 +9,12 @@ import 'package:jellyfin_client/domain/auth/auth_facade.dart';
 import 'package:jellyfin_client/domain/device_info/device_info_facade.dart';
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
-import 'package:jellyfin_client/usecases/authenticate_use_usecase.dart';
-import 'package:jellyfin_client/usecases/create_header_usecase.dart';
-import 'package:jellyfin_client/usecases/get_resumable_items_usecase.dart';
-import 'package:jellyfin_client/usecases/get_user_views_usecase.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+import 'domain/usecases/authenticate_use_usecase.dart';
+import 'domain/usecases/create_header_usecase.dart';
+import 'domain/usecases/get_resumable_items_usecase.dart';
+import 'domain/usecases/get_user_views_usecase.dart';
 
 class AppDependencies {
   final PackageInfo _packageInfoPlugin;

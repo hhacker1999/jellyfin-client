@@ -1,6 +1,6 @@
-import 'package:jellyfin_client/usecases/authenticate_use_usecase.dart';
-import 'package:jellyfin_client/usecases/get_resumable_items_usecase.dart';
-import 'package:jellyfin_client/usecases/get_user_views_usecase.dart';
+import 'package:jellyfin_client/domain/usecases/authenticate_use_usecase.dart';
+import 'package:jellyfin_client/domain/usecases/get_resumable_items_usecase.dart';
+import 'package:jellyfin_client/domain/usecases/get_user_views_usecase.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeViewModel {
@@ -10,8 +10,7 @@ class HomeViewModel {
   String text = "Initial text";
   HomeViewModel(
       {required this.authenticateUserUsecase,
-      required this.getUserViewUsecase,
-      required this.getResumableItemsUsecase}) {
+      required this.getUserViewUsecase,required this.getResumableItemsUsecase}) {
     authenticate();
   }
 
@@ -20,11 +19,10 @@ class HomeViewModel {
 
   Future<void> authenticate() async {
     _isLoading.sink.add(true);
-    await authenticateUserUsecase.execute("harsh", "golusadh");
+      await authenticateUserUsecase.execute("harsh", "golusadh");
     final item = await getResumableItemsUsecase.execute();
-    print(item.first);
-    _isLoading.sink.add(false);
-    _isLoading.sink.add(false);
+      _isLoading.sink.add(false);
+      _isLoading.sink.add(false);
   }
 
   String get testText => text;

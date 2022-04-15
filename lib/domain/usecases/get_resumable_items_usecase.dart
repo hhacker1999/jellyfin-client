@@ -1,7 +1,8 @@
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
 import 'package:jellyfin_client/domain/jellyfin/models/jellyfin_item.dart';
 import 'package:jellyfin_client/domain/storage/storage_facade.dart';
-import 'package:jellyfin_client/usecases/create_header_usecase.dart';
+import 'package:jellyfin_client/domain/usecases/create_header_usecase.dart';
+
 
 class GetResumableItemsUsecase {
   final CreateHeaderUsecase _createHeaderUsecase;
