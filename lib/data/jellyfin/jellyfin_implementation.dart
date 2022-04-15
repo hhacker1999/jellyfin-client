@@ -34,6 +34,7 @@ class JellyfinImplementation implements JellyFacade {
           "Limit": 12,
           "Recursive": true,
           "MediaTypes": "Video",
+          "Fields": "ProviderIds",
           "ImageTypeLimit": 1,
           "EnableImageTypes": "Backdrop, Primary, Thumb"
         },
