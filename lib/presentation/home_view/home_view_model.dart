@@ -10,7 +10,8 @@ class HomeViewModel {
   String text = "Initial text";
   HomeViewModel(
       {required this.authenticateUserUsecase,
-      required this.getUserViewUsecase,required this.getResumableItemsUsecase}) {
+      required this.getUserViewUsecase,
+      required this.getResumableItemsUsecase}) {
     authenticate();
   }
 
@@ -19,10 +20,10 @@ class HomeViewModel {
 
   Future<void> authenticate() async {
     _isLoading.sink.add(true);
-      await authenticateUserUsecase.execute("harsh", "golusadh");
+    await authenticateUserUsecase.execute("harsh", "golusadh");
     final item = await getResumableItemsUsecase.execute();
-      _isLoading.sink.add(false);
-      _isLoading.sink.add(false);
+    _isLoading.sink.add(false);
+    _isLoading.sink.add(false);
   }
 
   String get testText => text;

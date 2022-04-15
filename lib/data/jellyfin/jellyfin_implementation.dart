@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:jellyfin_client/app/constansts.dart';
 import 'package:jellyfin_client/domain/jellyfin/jelly_facade.dart';
-import 'package:jellyfin_client/domain/models/jellyfin_item.dart';
 import 'package:jellyfin_client/domain/models/jellyfin_view.dart';
+import 'package:jellyfin_client/domain/models/video_item/jellyfin_video_item.dart';
+import 'package:jellyfin_client/domain/models/video_item/video_item_model.dart';
 
 class JellyfinImplementation implements JellyFacade {
   final Dio _client;
@@ -24,7 +25,7 @@ class JellyfinImplementation implements JellyFacade {
   }
 
   @override
-  Future<List<JellyfinItem>> getResumableItems(
+  Future<List<VideoItemModel>> getResumableItems(
       String userId, Map<String, String> header) async {
     try {
       final resumePath = AppConstants.getResumeItemUrl(userId);
@@ -35,13 +36,14 @@ class JellyfinImplementation implements JellyFacade {
           "Recursive": true,
           "MediaTypes": "Video",
           "Fields": "ProviderIds",
+          "IncludeItemTypes": "Episode, Movie",
           "ImageTypeLimit": 1,
           "EnableImageTypes": "Backdrop, Primary, Thumb"
         },
         options: Options(headers: header),
       );
       List<dynamic> resMapList = dioRes.data["Items"];
-      return resMapList.map((e) => JellyfinItem.fromMap(e)).toList();
+      return resMapList.map((e) => JellyfinVideoItem.fromMap(e)).toList();
     } catch (_) {
       rethrow;
     }
