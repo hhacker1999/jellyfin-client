@@ -11,15 +11,16 @@ class HomeView extends StatelessWidget {
       builder: (_, model, __) => Scaffold(
         body: Center(
           child: StreamBuilder<bool>(
-              stream: model.isLoading,
-              initialData: false,
-              builder: (_, AsyncSnapshot<bool> snapshot) {
-                if (!snapshot.data!) {
-                  return Text(model.testText);
-                } else {
-                  return const CircularProgressIndicator();
-                }
-              }),
+            stream: model.isLoading,
+            initialData: false,
+            builder: (_, AsyncSnapshot<bool> snapshot) {
+              if (!snapshot.data!) {
+                return Text(model.testText);
+              } else {
+                return const CircularProgressIndicator();
+              }
+            },
+          ),
         ),
       ),
     );
