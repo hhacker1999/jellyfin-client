@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jellyfin_client/presentation/home_view/home_view.dart';
+import 'package:jellyfin_client/app/routes.dart';
+import 'package:jellyfin_client/presentation/helper/stream_listener_and_builder.dart';
 import 'package:provider/provider.dart';
 import 'login_view_model.dart';
 
@@ -30,10 +31,15 @@ class _LoginViewState extends State<LoginView> {
         return Scaffold(
           body: SafeArea(
             child: Center(
-              child: StreamBuilder<LoginViewState>(
+              child: StreamListenerAndBuilder<LoginViewState>(
                 stream: model.state,
-                initialData: model.state.value,
-                builder: (_, AsyncSnapshot<LoginViewState> snapshot) {
+                listener: (listeningState) {
+                  if (listeningState is LoginViewLoggedIn) {
+                    Navigator.pushReplacementNamed(
+                        context, AppRoutes.homeRoute);
+                  }
+                },
+                builder: (_, state) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -55,8 +61,7 @@ class _LoginViewState extends State<LoginView> {
                           label: Text("password"),
                         ),
                       ),
-                      if (snapshot.data is LoginViewError)
-                        Text((snapshot.data as LoginViewError).error),
+                      if (state is LoginViewError) Text(state.error),
                       ElevatedButton(
                         onPressed: () {
                           model.authenticateUser(
@@ -64,7 +69,7 @@ class _LoginViewState extends State<LoginView> {
                               _usernameController.text,
                               _passwordController.text);
                         },
-                        child: snapshot.data is LoginViewLoading
+                        child: state is LoginViewLoading
                             ? const CircularProgressIndicator()
                             : const Text("Login"),
                       ),
