@@ -44,7 +44,6 @@ class _JellyfinClientState extends State<JellyfinClient> {
             return MaterialPageRoute(
               builder: (_) => Provider<HomeViewModel>(
                 create: (_) => HomeViewModel(
-                    getUserViewUsecase: _appDependencies.getUserViewUsecase,
                     getResumableItemsUsecase:
                         _appDependencies.getResumableItemsUsecase,
                     getTmdbTrendingUsecase:
@@ -67,7 +66,6 @@ class _JellyfinClientState extends State<JellyfinClient> {
             return MaterialPageRoute(
               builder: (_) => Provider<HomeViewModel>(
                 create: (_) => HomeViewModel(
-                    getUserViewUsecase: _appDependencies.getUserViewUsecase,
                     getResumableItemsUsecase:
                         _appDependencies.getResumableItemsUsecase,
                     getTmdbTrendingUsecase:
